@@ -80,7 +80,7 @@ td.hl{color:var(--accent2)!important}
     <div class="panel">
       <h2>成本输入</h2>
       <div class="hint">默认填充示例值，直接修改任意项即自动重算</div>
-      <div class="row"><label>采购成本 (元)</label><input type="number" id="buy" value="115" step="0.01"></div>
+      <div class="row"><label>采购成本 (元)</label><input type="number" id="buy" value="20" step="0.01"></div>
       <div class="row"><label>国内物流 (元)</label><input type="number" id="domestic" value="6" step="0.01"></div>
       <div class="row"><label>国际物流+货代 (元)</label><input type="number" id="intl" value="67" step="0.01"></div>
       <div class="row"><label>获客成本 (元)</label><input type="number" id="acq" value="0" step="0.01"></div>
@@ -96,8 +96,8 @@ td.hl{color:var(--accent2)!important}
 
       <h2 style="margin-top:20px">利润率</h2>
       <div class="rangeRow">
-        <input type="range" id="profitRange" min="1" max="75" step="0.5" value="20">
-        <input type="number" id="profitInput" min="1" max="75" step="0.5" value="20">
+        <input type="range" id="profitRange" min="1" max="75" step="0.5" value="35">
+        <input type="number" id="profitInput" min="1" max="75" step="0.5" value="35">
         <span class="pct">%</span>
       </div>
       <div class="hint">美元价 ≈ 售价÷汇率，利润 = 售价×利润率。利润率上限 75%，越接近上限售价增速越快（分母趋零）。</div>
