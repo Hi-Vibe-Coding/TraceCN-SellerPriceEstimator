@@ -46,6 +46,7 @@ header .sub{color:var(--dim);font-size:13px}
 .detail{margin-top:16px;border-top:1px dashed var(--line);padding-top:12px;font-size:12px;color:var(--dim)}
 .detail div{display:flex;justify-content:space-between;padding:3px 0}
 .detail .fr{color:var(--txt)}
+.detail .soil{color:var(--soil)}
 .tableWrap{overflow:auto}
 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
 th,td{padding:8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -177,8 +178,8 @@ function renderDetail(base,price,profit,rate){
   $('detail').innerHTML=
     '<div><span>固定成本合计 (元)</span><span>'+fmt(base)+'</span></div>'+
     '<div><span>平台抽佣 (元)</span><span>'+fmt(price*num('commission')/100)+'</span></div>'+
-    '<div><span>利润 (元)</span><span class="fr">'+fmt(profitY)+'</span></div>'+
-    '<div><span>利润 (美元)</span><span class="fr">'+usd(profitY,rate)+'</span></div>'+
+    '<div><span class="soil">利润 (元)</span><span class="soil">'+fmt(profitY)+'</span></div>'+
+    '<div><span class="soil">利润 (美元)</span><span class="soil">'+usd(profitY,rate)+'</span></div>'+
     '<div><span>售价合计 (元)</span><span class="fr">'+fmt(price)+'</span></div>'+
     '<div><span>售价 (美元)</span><span class="fr">'+usd(price,rate)+'</span></div>';
 }
