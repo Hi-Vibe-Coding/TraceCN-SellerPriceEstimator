@@ -55,6 +55,8 @@ th:nth-child(2),td:nth-child(2){padding-right:4px}
 th:nth-child(3),td:nth-child(3){padding-left:4px;text-align:left;border-right:1px solid var(--line)}
 th:nth-child(4),td:nth-child(4){padding-right:4px}
 th:nth-child(5),td:nth-child(5){padding-left:4px;text-align:left}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:rgba(56,189,248,.08)}
 th{color:var(--dim);font-weight:400;font-size:12px;letter-spacing:.5px}
 td:nth-child(2),td:nth-child(3){color:var(--txt)}
 td:nth-child(4),td:nth-child(5){color:var(--soil)}
@@ -213,6 +215,12 @@ function renderTable(base,commission,curProfit,rate){
     const isCur=curProfit!==null && pr===curProfit;
     const tr=document.createElement('tr');
     if(isCur) tr.style.background='rgba(34,197,94,.08)';
+    tr.title='点击应用利润率 '+p+'%';
+    tr.onclick=function(){
+      $('profitRange').value=p;
+      $('profitInput').value=p;
+      compute();
+    };
     tr.innerHTML='<td>'+p+'%</td>'+
       '<td class="'+(isCur?'hl':'')+'">'+fmt(price)+'</td>'+
       '<td>'+usd(price,rate)+'</td>'+
