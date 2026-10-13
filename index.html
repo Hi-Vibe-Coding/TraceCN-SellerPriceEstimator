@@ -70,7 +70,7 @@ td.hl{color:var(--accent2)!important}
 <body>
 <div class="wrap">
   <header>
-    <h1>跨境<span>单品售价</span>预估器</h1>
+    <h1>跨境<span>单品售价</span>计算器</h1>
     <span class="sub">售价 = (采购+国内物流+国际物流+获客+退货预留) ÷ (1 − 平台抽佣% − 利润%)</span>
   </header>
 
@@ -95,11 +95,11 @@ td.hl{color:var(--accent2)!important}
 
       <h2 style="margin-top:20px">利润率</h2>
       <div class="rangeRow">
-        <input type="range" id="profitRange" min="1" max="60" step="0.5" value="20">
-        <input type="number" id="profitInput" min="1" max="60" step="0.5" value="20">
+        <input type="range" id="profitRange" min="1" max="75" step="0.5" value="20">
+        <input type="number" id="profitInput" min="1" max="75" step="0.5" value="20">
         <span class="pct">%</span>
       </div>
-      <div class="hint">美元价 ≈ 售价÷汇率，利润 = 售价×利润率。利润率上限 60%，避免分母趋零导致价格爆炸。</div>
+      <div class="hint">美元价 ≈ 售价÷汇率，利润 = 售价×利润率。利润率上限 75%，越接近上限售价增速越快（分母趋零）。</div>
 
       <div class="result">
         <div class="price" id="priceY">264.0 元</div>
@@ -149,7 +149,7 @@ function usd(n,r){return (n/r).toFixed(1);}
 function compute(){
   const rate=num('rate')>0?num('rate'):6.7;
   const commission=Math.min(num('commission'),95)/100;
-  const profit=Math.min(num('profitRange'),60)/100;
+  const profit=Math.min(num('profitRange'),75)/100;
   const base=num('buy')+num('domestic')+num('intl')+num('acq')+num('ret');
   const denom=1-commission-profit;
   const err=$('err');
@@ -204,7 +204,7 @@ function renderSteps(base,price,profit,rate){
 function renderTable(base,commission,curProfit,rate){
   const tbody=$('tbody'); tbody.innerHTML='';
   const ratio=1-commission;
-  for(const p of [15,20,25,30,35,40]){
+  for(const p of [15,20,25,30,35,40,45,50,55,60,65,70,75]){
     const pr=p/100; if(pr>=ratio) continue;
     const price=base/(ratio-pr);
     const by=price*pr;
@@ -227,7 +227,7 @@ function onRange(){
 function onProfitInput(){
   let v=parseFloat($('profitInput').value);
   if(isNaN(v)) return;
-  v=Math.min(60,Math.max(1,v));
+  v=Math.min(75,Math.max(1,v));
   $('profitRange').value=v;
   compute();
 }
