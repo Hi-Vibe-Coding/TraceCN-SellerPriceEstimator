@@ -186,17 +186,18 @@ function renderDetail(base,price,profit,rate){
 function renderSteps(base,price,profit,rate){
   const b=Math.round(base*100)/100;
   const cc=(num('commission')/100).toFixed(2).replace(/\.?0+$/,'')||'0';
-  const pp=(profit*100).toFixed(1).replace(/\.0$/,'');
+  const pp=profit.toFixed(2).replace(/\.?0+$/,'')||'0';
+  const ppPct=(profit*100).toFixed(1).replace(/\.0$/,'');
   const den=((1-profit-num('commission')/100)).toFixed(2).replace(/\.?0+$/,'');
   const pY=Math.round(price*100)/100;
   const pU=usd(price,rate);
   const L=[
-    ['常规公式','单品售价 = 采购成本 + 国内物流 + 国际物流(含货代) + 平台抽佣 + 获客成本 + 退货预留 + 单品售价×利润百分比'],
+    ['常规公式','单品售价 = 采购成本 + 国内物流 + 国际物流(含货代) + 单品售价×平台抽佣百分比 + 获客成本 + 退货预留 + 单品售价×利润百分比'],
     ['填入值后','单品售价 = '+num('buy')+' + '+num('domestic')+' + '+num('intl')+' + 单品售价×'+cc+' + '+num('acq')+' + '+num('ret')+' + 单品售价×'+pp],
     ['合并固定成本','单品售价 = '+b+' + 单品售价×'+cc+' + 单品售价×'+pp],
     ['移项求解','单品售价 × (1 − '+cc+' − '+pp+') = '+b],
     ['计算分母','单品售价 = '+b+' ÷ '+den],
-    ['最终结果','单品售价 = '+pY+'元 = '+pU+'美元（利润百分比 '+pp+'%）']
+    ['最终结果','单品售价 = '+pY+'元 = '+pU+'美元（利润百分比 '+ppPct+'%）']
   ];
   $('steps').innerHTML = L.map(r=>'<div><span class="dim">'+r[0]+'：</span><span class="acc">'+r[1]+'</span></div>').join('');
 }
